@@ -11,7 +11,7 @@ GraphNode::~GraphNode()
     //// STUDENT CODE
     ////
 
-    delete _chatBot; 
+//    delete _chatBot;  // Remove to fix crash when closing Chatbot window
 
     ////
     //// EOF STUDENT CODE
