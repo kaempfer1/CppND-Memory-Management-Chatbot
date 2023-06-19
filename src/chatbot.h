@@ -3,6 +3,7 @@
 
 #include <wx/bitmap.h>
 #include <string>
+#include <memory>	// include memory lib for smart pointers
 
 class GraphNode; // forward declaration
 class ChatLogic; // forward declaration
@@ -29,6 +30,11 @@ public:
 
     //// STUDENT CODE
     ////
+    
+	ChatBot(const ChatBot &source);					// Task 2: copy constructor
+    ChatBot &operator = (const ChatBot &source);	// Task 2: copy assignment operator
+    ChatBot(ChatBot &&source);						// Task 2: move constructor
+    ChatBot &operator = (ChatBot &&source);			// Task 2: move assignment operator
 
     ////
     //// EOF STUDENT CODE

@@ -118,7 +118,9 @@ ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
     ////
 
     // create chat logic instance
-    _chatLogic = new ChatLogic(); 
+// Task 1: make _chatLogic an exclusive resource to class ChatbotPanelDialog
+//    _chatLogic = new ChatLogic();
+	_chatLogic = std::make_unique<ChatLogic>();
 
     // pass pointer to chatbot dialog so answers can be displayed in GUI
     _chatLogic->SetPanelDialogHandle(this);
@@ -135,7 +137,9 @@ ChatBotPanelDialog::~ChatBotPanelDialog()
     //// STUDENT CODE
     ////
 
-    delete _chatLogic;
+// Task 1: make _chatLogic an exclusive resource to class ChatbotPanelDialog
+//    delete _chatLogic;
+	std::cout << "ChatBotPanelDialog Destructor" << std::endl;  // debug
 
     ////
     //// EOF STUDENT CODE
@@ -212,5 +216,6 @@ ChatBotPanelDialogItem::ChatBotPanelDialogItem(wxPanel *parent, wxString text, b
     _chatBotTxt->Wrap(150);
 
     // set background color
-    this->SetBackgroundColour((isFromUser == true ? wxT("YELLOW") : wxT("BLUE")));
+//    this->SetBackgroundColour((isFromUser == true ? wxT("YELLOW") : wxT("BLUE")));
+    this->SetBackgroundColour((isFromUser == true ? wxT("ORANGE") : wxT("BLUE")));
 }
