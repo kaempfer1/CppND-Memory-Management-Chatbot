@@ -17,12 +17,6 @@ ChatLogic::ChatLogic()
     //// STUDENT CODE
     ////
 
-    // create instance of chatbot
-//    _chatBot = new ChatBot("../images/chatbot.png");
-
-    // add pointer to chatlogic so that chatbot answers can be passed on to the GUI
-//    _chatBot->SetChatLogicHandle(this);
-
     ////
     //// EOF STUDENT CODE
 }
@@ -31,21 +25,6 @@ ChatLogic::~ChatLogic()
 {
     //// STUDENT CODE
     ////
-
-    // delete chatbot instance
-//    delete _chatBot;
-
-    // delete all nodes
-//    for (auto it = std::begin(_nodes); it != std::end(_nodes); ++it)
-//    {
-//        delete *it;
-//    }
-
-    // delete all edges
-//    for (auto it = std::begin(_edges); it != std::end(_edges); ++it)
-//    {
-//        delete *it;
-//    }
 
     ////
     //// EOF STUDENT CODE
@@ -172,8 +151,9 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
 //                            edge->SetChildNode(*childNode);
 //                            edge->SetParentNode(*parentNode);
 //                            _edges.push_back(edge);
-                            std::unique_ptr<GraphEdge> edge (new GraphEdge(id));
-                            edge->SetChildNode((*childNode).get());		// clue from knowledge db
+//                            std::unique_ptr<GraphEdge> edge (new GraphEdge(id));
+                            auto edge = std::make_unique<GraphEdge>(id);    // better, simplified expression for above (from code review)
+                            edge->SetChildNode((*childNode).get());		    // clue from knowledge db
                             edge->SetParentNode((*parentNode).get());
 
                             // find all keywords for current node
@@ -221,7 +201,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
             if (rootNode == nullptr)
             {
 //                rootNode = *it; // assign current node to root - 
-                rootNode = (*it).get(); // knowledge db
+                rootNode = it->get();   // best method to access member variable (from code review)
            }
             else
             {
@@ -234,9 +214,6 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
 
     // add chatbot to graph root node
 // Task 5: Moving the ChatBot
-//    _chatBot->SetRootNode(rootNode);
-//    rootNode->MoveChatbotHere(_chatBot);
-//	  _chatBot->SetChatLogicHandle(this);
   	SetChatbotHandle(&chatBot);
 	chatBot.SetChatLogicHandle(this);
 	chatBot.SetRootNode(rootNode);

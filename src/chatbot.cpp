@@ -54,7 +54,8 @@ ChatBot::ChatBot(const ChatBot &source) {
 	_chatLogic->SetChatbotHandle(this);
   	_currentNode = source._currentNode;
   	_rootNode = source._rootNode;
-  	_image = new wxBitmap(*source._image);
+  	_image = new wxBitmap();
+    *_image =* source._image;               // deep copy
 }
 
 // Task 2: The Rule of Five
@@ -70,7 +71,8 @@ ChatBot &ChatBot::operator = (const ChatBot &source) {
 	_chatLogic->SetChatbotHandle(this);
   	_currentNode = source._currentNode;
   	_rootNode = source._rootNode;
-  	_image = source._image;
+  	_image = new wxBitmap();
+    *_image =* source._image;               // deep copy needed per project review
 
   	return *this;
 }

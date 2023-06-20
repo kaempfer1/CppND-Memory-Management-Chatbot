@@ -8,6 +8,7 @@ find_package(wxWidgets REQUIRED COMPONENTS core base)
 include(${wxWidgets_USE_FILE})
 
 file(GLOB project_SRCS src/*.cpp)
+set(CMAKE_CXX_FLAGS "-g")
 
 add_executable(membot ${project_SRCS})
 target_link_libraries(membot ${wxWidgets_LIBRARIES})
